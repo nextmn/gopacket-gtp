@@ -131,7 +131,7 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 	binary.BigEndian.PutUint16(data[2:4], g.MessageLength)
 	binary.BigEndian.PutUint32(data[4:8], g.TEID)
 	if g.ExtensionHeaderFlag || g.SequenceNumberFlag || g.NPDUFlag {
-		data, err := b.AppendBytes(4)
+		data, err := b.PrependBytes(4)
 		if err != nil {
 			return err
 		}
@@ -143,7 +143,7 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 			// extensionLength is in 4-octet units
 			extensionLength := (lContent + 2) / 4
 			// Get two extra byte for the next extension header type and length
-			data, err = b.AppendBytes(lContent + 2)
+			data, err = b.PrependBytes(lContent + 2)
 			if err != nil {
 				return err
 			}
