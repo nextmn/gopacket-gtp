@@ -1,4 +1,4 @@
-module github.com/louisroyer/gopacket_gtp
+module github.com/louisroyer/gopacket-gtp
 
 go 1.19
 

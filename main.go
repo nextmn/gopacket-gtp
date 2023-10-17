@@ -6,7 +6,7 @@
 // tree.
 //
 
-package layers
+package gopacket_gtp
 
 import (
 	"encoding/binary"
