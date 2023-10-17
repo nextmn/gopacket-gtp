@@ -143,22 +143,26 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 	binary.BigEndian.PutUint16(data[2:4], g.MessageLength)
 	binary.BigEndian.PutUint32(data[4:8], g.TEID)
 	if g.SequenceNumberFlag {
-		binary.BigEndian.PutUint16(data[9:10], g.SequenceNumber)
+		binary.BigEndian.PutUint16(data[8:9], g.SequenceNumber)
 	}
 	if g.NPDUFlag {
-		data[11] = g.NPDU
+		data[10] = g.NPDU
 	}
 
 	if g.ExtensionHeaderFlag {
-		index := 12
+		index := 11
 		for _, eh := range g.GTPExtensionHeaders {
 			data[index] = eh.Type
+			index++
+
 			lContent := len(eh.Content)
 			// extensionLength is in 4-octet units
 			extensionLength := (lContent + 2) / 4
-			data[index+1] = byte(extensionLength)
-			copy(data[index+2:index+2+lContent], eh.Content)
-			index += 2 + lContent // type + len + content
+			data[index] = byte(extensionLength)
+			index++
+
+			copy(data[index:index+lContent], eh.Content)
+			index += lContent
 		}
 		// last type is 0x00 (No nore extension headers)
 		data[index] = 0x00
