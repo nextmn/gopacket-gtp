@@ -1,5 +1,5 @@
-module github.com/louisroyer/gopacket-gtp
+module github.com/nextmn/gopacket-gtp
 
-go 1.19
+go 1.21
 
 require github.com/google/gopacket v1.1.19
