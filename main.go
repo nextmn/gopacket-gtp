@@ -4,7 +4,7 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file in the root of the source
 // tree.
-//
+// SPDX-Licence-Identifier: BSD-3-Clause
 
 package gopacket_gtp
 
@@ -118,7 +118,7 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 	if g.ExtensionHeaderFlag || g.SequenceNumberFlag || g.NPDUFlag {
 		extHeadersLen += 4
 		for _, eh := range g.GTPExtensionHeaders {
-			extHeadersLen += len(eh.Content) + 2 // 2 bytes for Type + Lenght
+			extHeadersLen += len(eh.Content) + 2 // 2 bytes for Type + Length
 
 		}
 	}
