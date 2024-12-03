@@ -143,7 +143,7 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 	binary.BigEndian.PutUint16(data[2:4], g.MessageLength)
 	binary.BigEndian.PutUint32(data[4:8], g.TEID)
 	if g.SequenceNumberFlag {
-		binary.BigEndian.PutUint16(data[8:9], g.SequenceNumber)
+		binary.BigEndian.PutUint16(data[8:10], g.SequenceNumber)
 	}
 	if g.NPDUFlag {
 		data[10] = g.NPDU
