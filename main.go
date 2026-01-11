@@ -190,13 +190,3 @@ func (g *GTPv1U) NextLayerType() gopacket.LayerType {
 		return layers.LayerTypePPP
 	}
 }
-
-func decodeGTPv1u(data []byte, p gopacket.PacketBuilder) error {
-	gtp := &GTPv1U{}
-	err := gtp.DecodeFromBytes(data, p)
-	if err != nil {
-		return err
-	}
-	p.AddLayer(gtp)
-	return p.NextDecoder(gtp.NextLayerType())
-}
